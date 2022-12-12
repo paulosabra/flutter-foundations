@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/Flutter-0553B1?style=for-the-badge&logo=flutter&logoColor=white) ![](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 
 ### Course 01 - Flutter Foundations
-- [ ] App Architecture
+- [x] App Architecture
 - [ ] State Management with Riverpod
 - [x] Navigation with GoRouter
 - [ ] Automated Testing
