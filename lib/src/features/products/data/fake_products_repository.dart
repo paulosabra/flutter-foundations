@@ -3,7 +3,6 @@ import 'package:ecommerce_app/src/features/products/domain/product.dart';
 
 class FakeProductsRepository {
   FakeProductsRepository._();
-
   static FakeProductsRepository instance = FakeProductsRepository._();
 
   final List<Product> _products = kTestProducts;
@@ -25,8 +24,7 @@ class FakeProductsRepository {
   }
 
   Stream<Product?> watchProduct(String id) {
-    return watchProductsList().map(
-      (event) => event.firstWhere((element) => element.id == id),
-    );
+    return watchProductsList()
+        .map((products) => products.firstWhere((product) => product.id == id));
   }
 }

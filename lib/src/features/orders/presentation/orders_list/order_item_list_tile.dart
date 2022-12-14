@@ -1,9 +1,9 @@
-import 'package:ecommerce_app/src/common_widgets/custom_image.dart';
-import 'package:ecommerce_app/src/constants/app_sizes.dart';
-import 'package:ecommerce_app/src/features/cart/domain/item.dart';
 import 'package:ecommerce_app/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/src/common_widgets/custom_image.dart';
+import 'package:ecommerce_app/src/constants/app_sizes.dart';
+import 'package:ecommerce_app/src/features/cart/domain/item.dart';
 
 /// Shows an individual order item, including price and quantity.
 class OrderItemListTile extends StatelessWidget {
@@ -12,6 +12,7 @@ class OrderItemListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Read from data source
     final product = FakeProductsRepository.instance.getProduct(item.productId)!;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
