@@ -8,21 +8,15 @@ class FakeAuthRepository {
   Stream<AppUser?> authStateChanges() => _authState.stream;
   AppUser? get currentUser => _authState.value;
 
-  Future<void> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    // await Future.delayed(const Duration(seconds: 3));
-    // throw Exception('Connection failed');
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    await Future.delayed(const Duration(seconds: 3));
     if (currentUser == null) {
       _createNewUser(email);
     }
   }
 
   Future<void> createUserWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+      String email, String password) async {
     if (currentUser == null) {
       _createNewUser(email);
     }
@@ -35,6 +29,7 @@ class FakeAuthRepository {
   }
 
   void dispose() => _authState.close();
+
   void _createNewUser(String email) {
     _authState.value = AppUser(
       uid: email.split('').reversed.join(),

@@ -2,14 +2,13 @@ import 'package:ecommerce_app/src/features/authentication/data/fake_auth_reposit
 import 'package:ecommerce_app/src/features/authentication/presentation/sign_in/email_password_sign_in_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EmailPasswordSignInNotifier
+class EmailPasswordSignInController
     extends StateNotifier<EmailPasswordSignInState> {
-  final FakeAuthRepository repository;
-
-  EmailPasswordSignInNotifier({
+  EmailPasswordSignInController({
     required EmailPasswordSignInFormType formType,
-    required this.repository,
+    required this.authRepository,
   }) : super(EmailPasswordSignInState(formType: formType));
+  final FakeAuthRepository authRepository;
 
   Future<bool> submit(String email, String password) async {
     state = state.copyWith(value: const AsyncValue.loading());
@@ -21,9 +20,9 @@ class EmailPasswordSignInNotifier
   Future<void> _authenticate(String email, String password) {
     switch (state.formType) {
       case EmailPasswordSignInFormType.signIn:
-        return repository.signInWithEmailAndPassword(email, password);
+        return authRepository.signInWithEmailAndPassword(email, password);
       case EmailPasswordSignInFormType.register:
-        return repository.createUserWithEmailAndPassword(email, password);
+        return authRepository.createUserWithEmailAndPassword(email, password);
     }
   }
 
@@ -32,12 +31,12 @@ class EmailPasswordSignInNotifier
   }
 }
 
-final emailPasswordSignInNotifierProvider = StateNotifierProvider.autoDispose
-    .family<EmailPasswordSignInNotifier, EmailPasswordSignInState,
+final emailPasswordSignInControllerProvider = StateNotifierProvider.autoDispose
+    .family<EmailPasswordSignInController, EmailPasswordSignInState,
         EmailPasswordSignInFormType>((ref, formType) {
-  final repository = ref.watch(authRepositoryProvider);
-  return EmailPasswordSignInNotifier(
+  final authRepository = ref.watch(authRepositoryProvider);
+  return EmailPasswordSignInController(
+    authRepository: authRepository,
     formType: formType,
-    repository: repository,
   );
 });

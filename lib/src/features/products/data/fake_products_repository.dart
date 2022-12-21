@@ -33,20 +33,20 @@ final productsRepositoryProvider = Provider<FakeProductsRepository>((ref) {
   return FakeProductsRepository();
 });
 
-final productsListFutureProvider =
-    FutureProvider.autoDispose<List<Product>>((ref) {
-  final repository = ref.watch(productsRepositoryProvider);
-  return repository.fetchProductsList();
-});
-
 final productsListStreamProvider =
     StreamProvider.autoDispose<List<Product>>((ref) {
-  final repository = ref.watch(productsRepositoryProvider);
-  return repository.watchProductsList();
+  final productsRepository = ref.watch(productsRepositoryProvider);
+  return productsRepository.watchProductsList();
+});
+
+final productsListFutureProvider =
+    FutureProvider.autoDispose<List<Product>>((ref) {
+  final productsRepository = ref.watch(productsRepositoryProvider);
+  return productsRepository.fetchProductsList();
 });
 
 final productProvider =
     StreamProvider.autoDispose.family<Product?, String>((ref, id) {
-  final repository = ref.watch(productsRepositoryProvider);
-  return repository.watchProduct(id);
+  final productsRepository = ref.watch(productsRepositoryProvider);
+  return productsRepository.watchProduct(id);
 });

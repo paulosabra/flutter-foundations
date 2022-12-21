@@ -26,12 +26,12 @@ enum AppRoute {
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
-  final repository = ref.watch(authRepositoryProvider);
+  final authRepository = ref.watch(authRepositoryProvider);
   return GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: false,
     redirect: (context, state) {
-      final isLoggedIn = repository.currentUser != null;
+      final isLoggedIn = authRepository.currentUser != null;
       if (isLoggedIn) {
         if (state.location == '/signIn') {
           return '/';
@@ -43,7 +43,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       }
       return null;
     },
-    refreshListenable: GoRouterRefreshStream(repository.authStateChanges()),
+    refreshListenable: GoRouterRefreshStream(authRepository.authStateChanges()),
     routes: [
       GoRoute(
         path: '/',
