@@ -4,7 +4,7 @@
 
 ### Course 01 - Flutter Foundations
 - [x] App Architecture
-- [ ] State Management with Riverpod
+- [x] State Management with Riverpod
 - [x] Navigation with GoRouter
 - [ ] Automated Testing
 - [ ] Error Handling
